@@ -6,6 +6,7 @@
 package com.reacttest.microservicemain.service;
 
 import com.reacttest.microservicemain.domain.User;
+import com.reacttest.microservicemain.repository.TestRepository;
 import com.reacttest.microservicemain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,19 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private TestRepository testRepository;
+    
     public User saveUserDetails(User user) {
         
         return userRepository.save(user);
     }
     
     public Iterable<User> fetchAllUserDetails() {
+        Iterable<User> userList = userRepository.findAll();
+        System.out.println(""+userList);
+        System.out.println(""+userList.toString());
+        
         return userRepository.findAll();
     }
     

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -32,31 +33,51 @@ public class UserController {
     
     @PostMapping("/saveUserDetails")
     public ResponseEntity<?> saveUserDetails(@RequestBody User user) {
-        System.out.println("In saveUserDetails");
+        System.out.println("In saveUserDetails " + user);
         user = userService.saveUserDetails(user);
+        String message = "";
         
-        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        if(user != null) {
+            message = "User created successfully";
+        } else {
+            message= "Error creating user";
+        }
+        return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
+    
+    @PostMapping("/updateUserDetails")
+    public ResponseEntity<?> updateUserDetails(@RequestBody User user) {
+        System.out.println("In updateUserDetails");
+        user = userService.saveUserDetails(user);
+        String message = "";
+        
+        if(user != null) {
+            message = "User updated successfully";
+        } else {
+            message= "Error updating user";
+        }
+        return new ResponseEntity<String>(message, HttpStatus.OK);
     }
     
     @GetMapping("/fetchAllUserDetails")
-    public Iterable<User> fetchAllUserDetails() {
+    public ResponseEntity<?> fetchAllUserDetails() {
         System.out.println("In fetchAllUserDetails");
         
-        return userService.fetchAllUserDetails();
+        return new ResponseEntity<Iterable<User>> (userService.fetchAllUserDetails(), HttpStatus.OK);
     }
     
     @PostMapping("/fetchUserDetailsForId")
     public ResponseEntity<?> fetchUserDetailsForId(@RequestBody Integer userId) {
         System.out.println("In fetchUserDetailsForId"+userId);
         
-        return new ResponseEntity<User> (userService.fetchUserDetailsById(userId), HttpStatus.FOUND);
+        return new ResponseEntity<User> (userService.fetchUserDetailsById(userId), HttpStatus.OK);
     }
     
     @PostMapping("/deleteUser")
-    public ResponseEntity<?> deleteUser(@RequestBody Integer userId) {
-        System.out.println("In fetchUserDetailsForId"+userId);
+    public ResponseEntity<?> deleteUser(@RequestBody User user) {
+        System.out.println("In fetchUserDetailsForId"+user.getUserId());
         
-        return new ResponseEntity<String> (userService.deleteUser(userId), HttpStatus.FOUND);
+        return new ResponseEntity<String> (userService.deleteUser(user.getUserId()), HttpStatus.OK);
     }
     
 }

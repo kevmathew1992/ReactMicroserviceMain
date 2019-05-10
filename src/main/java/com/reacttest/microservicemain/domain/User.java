@@ -24,6 +24,13 @@ public class User {
     private String name;
     private int age;
     private int active;
+    
+    private String userName;
+    private String password;
+    private String email;
+    private String gender;
+    private int stateId;
+    private int cityId;
 
     public Integer getUserId() {
         return userId;
@@ -56,8 +63,59 @@ public class User {
     public void setActive(int active) {
         this.active = active;
     }
-    
-    
-    
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "userId=" + userId + ", name=" + name + ", age=" + age + ", active=" + active + ", userName=" + userName + ", password=" + password + ", email=" + email + ", gender=" + gender + ", stateId=" + stateId + ", cityId=" + cityId + '}';
+    }
+
     
 }
